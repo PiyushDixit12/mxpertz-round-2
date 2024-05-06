@@ -10,9 +10,8 @@ import {createResultWithData} from './Result.controller.js';
 export const createInterview = async (req,res) => {
     try {
         const {company,date,userId,createdFor} = req.body;
-
         // Check if companyId, date, and userId are provided
-        if(!company || !date || !userId || !createdFor || !mongoose.isValidObjectId(createdFor)) {
+        if(!company || !date || !userId || !createdFor || createdFor?.length == 0 || createdFor.some((value) => {return !mongoose.isValidObjectId(value)})) {
             return res.status(400).json(ResponseFormat(400,'Validation Error',null,false,'companyId, date, createdFor, and userId are required'));
         }
 
@@ -36,6 +35,9 @@ export const createInterview = async (req,res) => {
 
         await newInterview.save();
 
+        if(!newInterview) {
+            return res.status(500).json(ResponseFormat(500,'Can not create Interview '));
+        }
         // Create "Didn’t Attempt" result
         // const resultData = {
         //     studentId: createdFor,
@@ -45,7 +47,7 @@ export const createInterview = async (req,res) => {
         // };
         // Call createResult function from ResultController
         await createResultWithData(createdFor,
-            company,
+            newInterview._id,
             'Didn’t Attempt',
             userId);
 

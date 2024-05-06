@@ -10,5 +10,10 @@ export const routesConstant = {
     },
     home: {
         path: "/home"
+    },
+    students: {
+        path: "/students"
+    },interviews: {
+        path: "/interviews"
     }
 }

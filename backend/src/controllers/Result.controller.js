@@ -41,12 +41,15 @@ const createResult = async (req,res) => {
 };
 
 // Function to create a result and return the created data
-const createResultWithData = async (studentId,company,result,userId) => {
+const createResultWithData = async (studentIds = [],company,result,userId) => {
     try {
-        const newResult = new Result({student: studentId,company,result,userId});
+        const response = studentIds.map(async (value) => {
+            const newResult = new Result({student: value,company,result,userId});
         await newResult.validate(); // Validate the new result against the schema
-        await newResult.save();
-        return newResult; // Return the created data
+            return await newResult.save();
+        });
+
+        return response; // Return the created data
     } catch(error) {
         throw new Error(`Error creating result: ${error.message}`);
     }

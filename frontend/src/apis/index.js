@@ -13,3 +13,9 @@ export const fetchPost = async ({body,url}) => {
     console.log("Fetch data  is ",jsonData);
     return jsonData;
 }
+
+export const fetchGet = async ({url}) => {
+    const data = await fetch(`${baseUrl}${url}`);
+    const jsonData = await data.json();
+    return jsonData;
+}

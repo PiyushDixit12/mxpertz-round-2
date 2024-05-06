@@ -4,6 +4,10 @@ import {routesConstant} from "./routesConstant";
 import {Login} from "../pages/login/Login";
 import {SignUp} from "../pages/signup/SignUp";
 import {Toaster} from 'react-hot-toast'
+import {Layout} from "../components/layout/Layout";
+import {Batches} from "../pages/batches/Batches";
+import {Students} from "../pages/students/Students";
+import {Interviews} from "../pages/interview/Interviews";
 export const AppRoutes = () => {
 
     return (
@@ -17,7 +21,10 @@ export const AppRoutes = () => {
                 </Route> */}
                 <Route path={routesConstant.login.path} element={<><Login /></>} />
                 <Route path={routesConstant.signUP.path} element={<><SignUp /></>} />
-                <Route path={routesConstant.home.path} element={<>home</>} />
+                <Route path={routesConstant.home.path} element={<><Layout><Batches /></Layout></>} />
+                <Route path={routesConstant.students.path} element={<><Layout><Students /></Layout></>} />
+                <Route path={routesConstant.interviews.path} element={<><Layout><Interviews /></Layout></>} />
+
 
                 <Route path="*" element={<>{<Navigate to={"/login"} />}</>} />
             </Routes>

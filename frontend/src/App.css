@@ -22,7 +22,7 @@ h2 {
   color: #333;
 }
 
-input {
+input,select {
   padding: 10px;
   border: 2px solid #ddd; 
   transition: border-color 0.3s ease-in-out;
@@ -31,7 +31,7 @@ input {
   background-color: #f4f4f4; 
 }
 
-input:focus {
+input:focus,select:focus {
   border-color: #ff9900;
 }
 
@@ -44,4 +44,15 @@ button {
 
 button:hover {
   background-color: #ff6600;
+}
+
+.text-white-custom{
+  color:white !important;
+}
+
+@media (max-width:564px) {
+  .text-white-custom{
+  color:black !important;
+}
+
 }

@@ -65,7 +65,7 @@ export const getInterviewsByUserId = async (req,res) => {
         const interviews = await Interview.find({userId}).select("-__v");
 
         if(!interviews || interviews.length === 0) {
-            return res.status(404).json(ResponseFormat(404,'Interviews not found for this user',null,false));
+            return res.status(404).json(ResponseFormat(404,'Interviews not found for this user',[],false));
         }
 
         return res.json(ResponseFormat(200,'Interviews found',interviews));
