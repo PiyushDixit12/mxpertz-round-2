@@ -65,7 +65,7 @@ export const Batches = () => {
                             <ListGroup>
                                 {data.map((value,indx) => {
                                     return (
-                                        <ListGroup.Item key={indx}><div className=" w-100 d-flex justify-content-between"> <span className=" fs-5">{value?.name}</span> <div><button className=" btn btn-success">edit</button> <button className=" btn btn-danger disabled" disabled>delete</button></div></div>  </ListGroup.Item >
+                                        <ListGroup.Item key={indx}><div className=" w-100 d-flex justify-content-between"> <span className=" fs-5">{value?.name}</span> <div><button className=" btn btn-success" disabled>edit</button> <button className=" btn btn-danger disabled" disabled>delete</button></div></div>  </ListGroup.Item >
                                     )
 
                                 })}

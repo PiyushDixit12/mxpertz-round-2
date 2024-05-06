@@ -2,6 +2,7 @@ import {Student} from "../models/Student.models.js";
 import {ResponseFormat} from "../utils/ResponseFormat.js";
 
 
+// to create a student 
 export const createStudent = async (req,res) => {
     const {name,college,status,userId} = req.body;
 

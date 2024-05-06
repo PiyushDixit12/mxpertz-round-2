@@ -9,5 +9,9 @@ export const allUrl = {
     getStudents: '/user/getStudents',  // /:userId will be added 
     createStudentsUrl: '/student',
     getInterviews: '/user/getInterviews',  // /:userId will be added 
-    createInterviewsUrl: '/interview'
+    createInterviewsUrl: '/interview',
+    getStudentsOfInterview: '/interview/students', // /:userId/:interviewId
+    createScoreAndUpdateResult: '/result/createScoreAndUpdateResult',
+    downloadStudentCsv: "/csv/student",
+    downloadInterviewCsv: "/csv/interview"
 };

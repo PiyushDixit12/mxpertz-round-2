@@ -7,6 +7,7 @@ import {batchRouter} from './src/routes/Batch.routes.js';
 import {studentRouter} from './src/routes/Student.routes.js';
 import {interviewRouter} from './src/routes/Interview.routes.js';
 import {resultRouter} from './src/routes/Result.routes.js';
+import {csvRouter} from './src/routes/csv.routes.js';
 
 export const app = express();
 
@@ -27,3 +28,4 @@ app.use("/batch",batchRouter);
 app.use("/student",studentRouter);
 app.use("/interview",interviewRouter);
 app.use("/result",resultRouter);
+app.use("/csv",csvRouter);

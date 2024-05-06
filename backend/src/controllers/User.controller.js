@@ -9,7 +9,7 @@ import {Result} from "../models/Result.models.js";
 
 
 
-
+// sign up user 
 export const singUpUser = async (req,res) => {
     try {
         const {email,password,name} = req.body;
@@ -22,7 +22,7 @@ export const singUpUser = async (req,res) => {
     }
 };
 
-
+// login user 
 export const userLogin = async (req,res) => {
     try {
         const {email,password} = req.body;
@@ -75,6 +75,7 @@ export const getInterviewsByUserId = async (req,res) => {
     }
 };
 
+// get results by user id 
 export const getAllResultsByUserId = async (req,res) => {
     try {
         const {userId} = req.params; // Assuming userId is passed in the request parameters

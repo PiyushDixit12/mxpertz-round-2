@@ -1,17 +1,17 @@
-import {useCallback,useEffect,useState} from "react"
-import {downloadCsv,fetchGet} from "../../apis";
+import {useEffect,useState} from "react"
+import {fetchGet} from "../../apis";
 import {allUrl} from "../../apis/url";
-import {useNavigate} from "react-router-dom";
+import {useNavigate,useParams} from "react-router-dom";
 import {routesConstant} from "../../routes/routesConstant";
 import toast from "react-hot-toast";
 //import {CreateBatches} from "./CreateBatches";
 import ListGroup from 'react-bootstrap/ListGroup';
-import {CreateStudent} from "./CreateStudent";
+// import {CreateStudent} from "./CreateStudent";
 
-export const Students = () => {
+export const InterviewStudent = () => {
     const [data,setData] = useState("loading");
-    const [user,setUser] = useState();
-
+    const params = useParams();
+    console.log(params)
     const navigate = useNavigate();
     useEffect(() => {
         async function fn() {
@@ -19,10 +19,8 @@ export const Students = () => {
                 localStorage.clear();
                 navigate(routesConstant.login.path);
             } else {
-                const userData = localStorage.getItem("user");
-                const userData2 = JSON.parse(userData);
-                setUser(userData2);
-                const data = await fetchGet({url: allUrl.getStudents + "/" + userData2._id});
+
+                const data = await fetchGet({url: allUrl.getStudentsOfInterview + "/" + params.interviewId});
                 if(data.success == true) {
                     console.log("students is ",data);
                     setData(data.data);
@@ -33,12 +31,8 @@ export const Students = () => {
 
         }
         fn();
-    },[navigate]);
+    },[navigate,params.interviewId]);
 
-    const [show,setShow] = useState(false);
-
-    const handleClose = useCallback(() => setShow(false),[]);
-    const handleShow = useCallback(() => setShow(true),[]);
 
     return (
         <div className=" w-100 h-100">
@@ -54,42 +48,34 @@ export const Students = () => {
                             <h1>
                                 No Students Available
                             </h1>
-                            <button className=" rounded-3 border-0 p-2 bg-primary text-white" onClick={handleShow} > Create Now </button>
-                            {show ? <CreateStudent show={show} id={user._id} handleClose={handleClose} /> : null}
                         </div> :
                         <>
                             <div className=" ms-1 mb-4 d-flex  justify-content-between align-items-center">
-                                <h5 > Organization students</h5>
-                                <button className=" rounded-3 border-0 p-2 bg-primary text-white" onClick={handleShow} > Create New</button>
-                                {show ? <CreateStudent show={show} id={user._id} handleClose={handleClose} /> : null}
+                                <h5 > Interview students</h5>
                             </div>
                             <ListGroup>
                                 <ListGroup.Item><div className=" w-100 row justify-content-between">
                                     <span className="col-3 text-center  fs-5  text-center">Student</span>
-                                    <span className="col-3  text-center fs-5 ">Status</span>
+                                    <span className="col-2  text-center fs-5 ">Status</span>
                                     <span className="col-3  text-center fs-5 ">college</span>
-                                    <span className="col-3  text-center fs-5 ">options</span>
+                                    <span className="col-2  text-center fs-5 ">Result</span>
+                                    <span className="col-2  text-center fs-5 ">options</span>
                                 </div>
                                 </ListGroup.Item >
                                 {data.map((value,indx) => {
+                                    console.log("index is ",indx," value  ",value)
                                     return (<ListGroup.Item key={indx}><div className=" w-100 row d-flex align-items-center justify-content-between">
                                         <span className=" col-3 text-center  fs-5 ">{value?.name}</span>
-                                        <span className=" col-3  text-center fs-5 ">{value?.status}</span>
+                                        <span className=" col-2  text-center fs-5 ">{value?.status}</span>
                                         <span className=" col-3 text-center  fs-5 ">{value?.college}</span>
-                                        <button className="col-3 text-center  btn btn-success fs-5 " disabled>edit</button>
+                                        <span className=" col-2 text-center  fs-5 ">{value?.result}</span>
+                                        <button className="col-2 text-center  btn btn-success fs-5 " disabled={value.result == 'PASS'} onClick={() => {navigate(`${routesConstant.updateInterviewResult.path}/${value.resultId}/${value.userId}/${value._id}`)}}>edit</button>
+
+
                                     </div>
                                     </ListGroup.Item >)
                                 })}
                             </ListGroup>
-                            <div className=" w-100 d-flex justify-content-end ">
-                                <button className=" mt-5 text-center  btn btn-primary fs-5 " onClick={() => {
-                                    const fn = async () => {
-                                        downloadCsv({url: allUrl.downloadStudentCsv + "/" + user._id,name: 'student'})
-                                    }
-                                    fn();
-                                }}>DownLoad csv</button>
-
-                            </div>
                         </>
             }
 

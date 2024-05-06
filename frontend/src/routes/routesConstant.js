@@ -16,4 +16,10 @@ export const routesConstant = {
     },interviews: {
         path: "/interviews"
     }
+    ,interviewsById: {
+        path: "/interviews"
+    },
+    updateInterviewResult: {
+        path: '/updateResult'
+    }
 }

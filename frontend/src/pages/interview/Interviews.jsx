@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useState} from "react"
-import {fetchGet} from "../../apis";
+import {downloadCsv,fetchGet} from "../../apis";
 import {allUrl} from "../../apis/url";
 import {useNavigate} from "react-router-dom";
 import {routesConstant} from "../../routes/routesConstant";
@@ -78,14 +78,23 @@ export const Interviews = () => {
                                         <span className=" col-3 text-center  fs-5 ">{value?.company}</span>
                                         <span className=" col-3  text-center fs-5 ">{value?.date}</span>
                                         <div className="col-3 text-center  fs-5 d-flex justify-content-center ">
-                                            <button className=" btn btn-primary me-1  ">View </button>
+                                            <button className=" btn btn-primary me-1  " onClick={() => {navigate(routesConstant.interviewsById.path + "/" + value._id)}}>View </button>
 
-                                            <button className=" btn btn-success ms-1  ">Edit </button>
+                                            {/* <button className=" btn btn-success ms-1  ">Edit </button> */}
                                         </div>
                                     </div>
                                     </ListGroup.Item >)
                                 })}
                             </ListGroup>
+                            <div className=" w-100 d-flex justify-content-end ">
+                                <button className=" mt-5 text-center  btn btn-primary fs-5 " onClick={() => {
+                                    const fn = async () => {
+                                        downloadCsv({url: allUrl.downloadInterviewCsv + "/" + user._id,name: "interview"});
+                                    }
+                                    fn();
+                                }}>DownLoad csv</button>
+
+                            </div>
                         </>
             }
 

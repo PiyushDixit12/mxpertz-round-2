@@ -19,3 +19,20 @@ export const fetchGet = async ({url}) => {
     const jsonData = await data.json();
     return jsonData;
 }
+
+export const downloadCsv = function({url,name}) {
+
+    fetch(baseUrl + url)
+        .then(response => response.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            console.log(url)
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${name}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
+
+}

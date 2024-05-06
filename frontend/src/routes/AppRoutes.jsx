@@ -8,6 +8,8 @@ import {Layout} from "../components/layout/Layout";
 import {Batches} from "../pages/batches/Batches";
 import {Students} from "../pages/students/Students";
 import {Interviews} from "../pages/interview/Interviews";
+import {InterviewStudent} from "../pages/interviewStudent/InterviewStudent";
+import {UpdateStudentResult} from "../pages/interviewStudent/UpdateStudentResult";
 export const AppRoutes = () => {
 
     return (
@@ -24,6 +26,8 @@ export const AppRoutes = () => {
                 <Route path={routesConstant.home.path} element={<><Layout><Batches /></Layout></>} />
                 <Route path={routesConstant.students.path} element={<><Layout><Students /></Layout></>} />
                 <Route path={routesConstant.interviews.path} element={<><Layout><Interviews /></Layout></>} />
+                <Route path={routesConstant.interviewsById.path + "/:interviewId"} element={<><Layout><InterviewStudent /></Layout></>} />
+                <Route path={routesConstant.updateInterviewResult.path + "/:resultId/:userId/:studentId"} element={<><Layout><UpdateStudentResult /></Layout></>} />
 
 
                 <Route path="*" element={<>{<Navigate to={"/login"} />}</>} />
