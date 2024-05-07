@@ -10,7 +10,7 @@ export const Header = () => {
         <>
             <Navbar key={"sm"} expand={"sm"} className=" bg-primary  mb-3">
                 <Container >
-                    <Navbar.Brand href="/" className=' text-white'>Mx pert z</Navbar.Brand>
+                    <Navbar.Brand href="/" className=' text-white'>Mxpertz</Navbar.Brand>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${"sm"}`} />
                     <Navbar.Offcanvas
                         id={`offcanvasNavbar-expand-${"sm"}`}
